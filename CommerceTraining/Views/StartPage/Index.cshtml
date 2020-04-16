@@ -3,22 +3,8 @@
 
 @model CommerceTraining.Models.ViewModels.PageViewModel<CommerceTraining.Models.Pages.StartPage>
 
-<div>
+<h2>
     @Html.PropertyFor(m => m.CurrentPage.Name)
-</div>
+</h2>
 
-
-@*ToDo: uncomment/create when the categories exist (Mod. C)*@
-@*<div>
-    Top Level Categories
-    <ul>
-        @foreach (var item in Model.topLevelCategories)
-        {
-
-            <li>
-                @Html.ContentLink(item.ContentLink)
-            </li>
-        }
-    </ul>
-</div>*@
 

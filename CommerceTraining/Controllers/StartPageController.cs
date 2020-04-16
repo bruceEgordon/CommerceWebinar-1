@@ -9,7 +9,6 @@ using CommerceTraining.Models.Pages;
 using EPiServer.ServiceLocation;
 using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Web.Routing;
-//using CommerceTraining.SupportingClasses;
 
 namespace CommerceTraining.Controllers
 {
@@ -17,35 +16,19 @@ namespace CommerceTraining.Controllers
     {
        
         public readonly IContentLoader _contentLoader;
-        public readonly UrlResolver _urlResolver;
 
         ContentReference topCategory { get; set; } // used for listing of nodes at the start-page
 
-        public StartPageController(
-            IContentLoader contentLoader
-            , UrlResolver urlResolver)
+        public StartPageController(IContentLoader contentLoader)
         {
             _contentLoader = contentLoader;
-            _urlResolver = urlResolver;
-
-            // uncomment the below when the catalog is modelled
-            // topCategory = contentLoader.Get<StartPage>(ContentReference.StartPage).Settings.topCategory;
-        }
-
-        public string GetUrl(ContentReference contentReference)
-        {
-            return _urlResolver.GetUrl(contentReference);
         }
 
         public ActionResult Index(StartPage currentPage)
         {
             var model = new CommerceTraining.Models.ViewModels.PageViewModel<StartPage>(currentPage)
             {
-                MainBodyStartPage = currentPage.MainBody,
                 myPageChildren = _contentLoader.GetChildren<IContent>(currentPage.ContentLink),
-                
-                // uncomment the below when the catalog is modelled
-                //topLevelCategories = _contentLoader.GetChildren<CatalogContentBase>(topCategory).OfType<NodeContent>(),
             };
 
             return View(model);
